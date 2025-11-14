@@ -17,6 +17,21 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
 });
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+
+const corsOptions = {
+  origin: 'https://expense-reminder.netlify.app', // your Netlify site
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+};
+app.use(cors(corsOptions));
+
+// or for development allow all:
+// app.use(cors());
+
 function auth(req, res, next) {
   const header = req.headers.authorization;
   if (!header) return res.status(401).json({ error: 'no auth' });
