@@ -1,4 +1,4 @@
-# netlify.toml — Vite frontend inside expense-reminder-full/frontend
+# netlify.toml — frontend lives inside expense-reminder-full/frontend
 [build]
   base    = "expense-reminder-full/frontend"
   command = "npm install && npm run build"
