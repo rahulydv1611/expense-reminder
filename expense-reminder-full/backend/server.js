@@ -65,7 +65,7 @@ async function sendWhatsApp(phone, text) {
   const txt = await resp.text();
   return txt;
 }
-new CronJob('0 7 * * *', async function() {
+new Cron('0 7 * * *', async function() {
   console.log('[cron] checking reminders');
   try {
     const q = `SELECT e.*, u.email, u.phone FROM expenses e JOIN users u ON u.id = e.user_id WHERE (e.due_date::date - e.reminder_days_before::int) = CURRENT_DATE`;
