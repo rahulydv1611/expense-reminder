@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const pg = require('pg');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const cron = require('node-cron');
+const cron = require('cron');
 const nodemailer = require('nodemailer');
 const fetch = require('node-fetch');
 require('dotenv').config();
