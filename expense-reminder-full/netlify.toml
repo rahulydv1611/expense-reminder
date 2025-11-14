@@ -1,6 +1,6 @@
-# netlify.toml — Vite frontend in the "frontend" folder
+# netlify.toml — use correct base directory where your frontend lives
 [build]
-  base    = "frontend"
+  base    = "expense-reminder-full/frontend"   # ← <- change this if needed
   command = "npm install && npm run build"
   publish = "dist"
 
