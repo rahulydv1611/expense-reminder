@@ -1,0 +1,9 @@
+# netlify.toml — Vite frontend in the "frontend" folder
+[build]
+  base    = "frontend"
+  command = "npm install && npm run build"
+  publish = "dist"
+
+[dev]
+  command = "npm run dev"
+  port = 5173
