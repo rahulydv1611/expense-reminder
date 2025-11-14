@@ -1,4 +1,1 @@
-# netlify.toml — build frontend with an explicit cd (avoids base-dir parsing issues)
-[build]
-  command = "cd frontend && npm install && npm run build"
-  publish = "frontend/dist"
+
