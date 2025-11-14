@@ -80,6 +80,6 @@ new CronJob('0 7 * * *', async function() {
       }
     }
   } catch (err) { console.error('cron error', err); }
-}null, true, /* timezone, e.g. */ 'UTC');
+},null, true, /* timezone, e.g. */ 'UTC');
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, ()=>console.log('Server running on',PORT));
