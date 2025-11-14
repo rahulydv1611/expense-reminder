@@ -9,9 +9,36 @@ export default function App(){
   const [expenses, setExpenses] = useState([])
   const [form, setForm] = useState({ title:'', amount:'', due_date:'', notify_email:true, notify_whatsapp:false })
   useEffect(()=>{ if (token) fetchExpenses() }, [token])
-  async function register(){
-    try { const r = await axios.post(`${API}/api/register`, { email, password, phone }); localStorage.setItem('token', r.data.token); setToken(r.data.token); } catch (e){ alert('reg err '+e?.response?.data?.error || e.message) }
+async function registerUser(payload) {
+  const API = import.meta.env.VITE_API_URL;
+  const url = `${API}/register`; // adjust path if your endpoint is different
+  console.log('Register URL ->', url);
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      // credentials: 'include' // uncomment if using cookies
+    });
+
+    console.log('HTTP status', resp.status, resp.statusText);
+    const text = await resp.text(); // read raw body
+    try {
+      const json = JSON.parse(text);
+      console.log('Response JSON:', json);
+      return json;
+    } catch (e) {
+      console.log('Response text (not JSON):', text);
+      throw new Error('Non-JSON response: ' + text);
+    }
+  } catch (err) {
+    console.error('Fetch failed:', err);
+    alert('reg err: ' + (err.message || String(err)));
+    throw err;
   }
+}
+
   async function login(){
     try { const r = await axios.post(`${API}/api/login`, { email, password }); localStorage.setItem('token', r.data.token); setToken(r.data.token); } catch (e){ alert('login err') }
   }
