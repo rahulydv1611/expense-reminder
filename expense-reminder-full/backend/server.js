@@ -65,7 +65,7 @@ async function sendWhatsApp(phone, text) {
   const txt = await resp.text();
   return txt;
 }
-cron.schedule('0 7 * * *', async () => {
+new CronJob('0 7 * * *', async function() {
   console.log('[cron] checking reminders');
   try {
     const q = `SELECT e.*, u.email, u.phone FROM expenses e JOIN users u ON u.id = e.user_id WHERE (e.due_date::date - e.reminder_days_before::int) = CURRENT_DATE`;
@@ -80,6 +80,6 @@ cron.schedule('0 7 * * *', async () => {
       }
     }
   } catch (err) { console.error('cron error', err); }
-});
+}null, true, /* timezone, e.g. */ 'UTC');
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, ()=>console.log('Server running on',PORT));
